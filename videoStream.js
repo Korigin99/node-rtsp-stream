@@ -13,6 +13,7 @@ STREAM_MAGIC_BYTES = "jsmp" // Must be 4 bytes
 VideoStream = function(options) {
   this.options = options
   this.name = options.name
+  this.type = options.type
   this.streamUrl = options.streamUrl
   this.width = options.width
   this.height = options.height
