@@ -21,15 +21,21 @@ Mpeg1Muxer = function(options) {
     }
   }
   this.spawnOptions = [
-    "-rtsp_transport",
-    "tcp",
-    "-i",
+    "-rtsp_transport", "tcp", "-i",
     this.url,
     '-f',
-    'mpegts',
-    '-codec:v',
     'mpeg1video',
-    // additional ffmpeg options go here
+    '-b:v', '5000k',
+    '-maxrate', '8000k',
+    '-bufsize', '20000k',
+    '-pix_fmt', 'yuv420p',
+    '-vf', 'scale=in_range=pc:out_range=tv,format=yuv420p',  // 상세한 범위 및 형식 변환 옵션
+    '-sws_flags', 'lanczos+accurate_rnd',
+    '-an',
+    '-r', '30', 
+    '-g', '60',
+    '-qmin', '2',
+    '-qmax', '31',
     ...this.additionalFlags,
     '-'
   ]
